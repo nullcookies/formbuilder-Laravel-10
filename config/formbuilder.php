@@ -36,6 +36,6 @@ return [
      * Models used in form builder
      */
     'models' => [
-        'user' => \App\User::class,
+        'user' => \App\Models\User::class,
     ],
 ];
