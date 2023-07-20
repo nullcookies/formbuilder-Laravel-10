@@ -22,3 +22,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::middleware('web')
+    ->prefix(config('formbuilder.url_path', '/form-builder'))
+    ->group(function () {
+        Route::redirect('/', url(config('formbuilder.url_path', '/form-builder').'/forms'));
+
+        /**
+         * Public form url
+         */
+        Route::get('/form/{identifier}', [App\Http\Controllers\RenderFormController::class, 'render'])->name('form.render');
+        Route::resource('/forms', 'App\Http\Controllers\FormController');
+    });
